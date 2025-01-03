@@ -55,6 +55,23 @@ const subcategoryButtons = document.querySelectorAll(".subcategoryBtn");
 const swipeLeftBtn = document.getElementById("swipe-left");
 const swipeRightBtn = document.getElementById("swipe-right");
 
+const myAccountSection = document.getElementById("my-account");
+const accountGenderSelect = document.getElementById("accountGenderSelect");
+const accountWomenSizes = document.getElementById("accountWomenSizes");
+const accountMenSizes = document.getElementById("accountMenSizes");
+const accountWomenTopSize = document.getElementById("accountWomenTopSize");
+const accountWomenBottomSize = document.getElementById("accountWomenBottomSize");
+const accountWomenShoeSize = document.getElementById("accountWomenShoeSize");
+const accountMenTopSize = document.getElementById("accountMenTopSize");
+const accountMenBottomSize = document.getElementById("accountMenBottomSize");
+const accountMenShoeSize = document.getElementById("accountMenShoeSize");
+const updatePreferencesBtn = document.getElementById("updatePreferences");
+const goBackToMainBtn = document.getElementById("goBackToMain");
+const usernameDisplay = document.getElementById("usernameDisplay");
+const accountUsernameDisplay = document.getElementById("accountUsernameDisplay");
+const logoutButton = document.getElementById("logoutButton");
+
+
 /********************************************
  * DOM Elements for Pagination Buttons
  ********************************************/
@@ -153,6 +170,42 @@ function loadSubcategory(subcat) {
 
   // Also highlight the subcategory button
   highlightSubcategoryButtons(subcat);
+}
+
+// MyAccount related functions
+function showMyAccountPage() {
+  // Prefill gender
+  accountGenderSelect.value = currentUser.gender;
+
+  // Show the correct sizes based on gender
+  if (currentUser.gender === "women") {
+    accountWomenSizes.classList.remove("d-none");
+    accountMenSizes.classList.add("d-none");
+
+    // Prefill sizes
+    accountWomenTopSize.value = currentUser.topSize;
+    accountWomenBottomSize.value = currentUser.bottomSize;
+    accountWomenShoeSize.value = currentUser.shoeSize;
+  } else {
+    accountWomenSizes.classList.add("d-none");
+    accountMenSizes.classList.remove("d-none");
+
+    // Prefill sizes
+    accountMenTopSize.value = currentUser.topSize;
+    accountMenBottomSize.value = currentUser.bottomSize;
+    accountMenShoeSize.value = currentUser.shoeSize;
+  }
+
+  // Show the My Account page
+  hideAllSections();
+  myAccountSection.classList.remove("d-none");
+}
+
+function showUsername() {
+  if (currentUser && currentUser.username) {
+    usernameDisplay.textContent = `Hi, ${currentUser.username}`;
+    accountUsernameDisplay.textContent = currentUser.username;
+  }
 }
 
 /********************************************
@@ -384,6 +437,69 @@ historyNextPageBtn.addEventListener("click", () => {
     historyPage++;
     renderHistory();
   }
+});
+
+// MyAccount event listerners
+const myAccountButton = document.getElementById("myAccountButton");
+myAccountButton.addEventListener("click", () => {
+  showUsername(); // Update the username display
+  showMyAccountPage(); // Navigate to the My Account page
+});
+
+logoutButton.addEventListener("click", () => {
+  // Clear user data
+  currentUser = null;
+  localStorage.removeItem("currentUser");
+
+  // Clear UI elements
+  usernameDisplay.textContent = "";
+
+  // Redirect to login page
+  showSection(loginPageSection);
+});
+
+// Toggle sizes when gender is changed
+accountGenderSelect.addEventListener("change", () => {
+  const selectedGender = accountGenderSelect.value;
+
+  if (selectedGender === "women") {
+    accountWomenSizes.classList.remove("d-none");
+    accountMenSizes.classList.add("d-none");
+  } else {
+    accountWomenSizes.classList.add("d-none");
+    accountMenSizes.classList.remove("d-none");
+  }
+});
+
+// Update Preferences Button
+updatePreferencesBtn.addEventListener("click", () => {
+  const selectedGender = accountGenderSelect.value;
+
+  // Update user preferences
+  currentUser.gender = selectedGender;
+
+  if (selectedGender === "women") {
+    currentUser.topSize = accountWomenTopSize.value;
+    currentUser.bottomSize = accountWomenBottomSize.value;
+    currentUser.shoeSize = accountWomenShoeSize.value;
+  } else {
+    currentUser.topSize = accountMenTopSize.value;
+    currentUser.bottomSize = accountMenBottomSize.value;
+    currentUser.shoeSize = accountMenShoeSize.value;
+  }
+
+  // Save updated preferences to localStorage
+  saveToLocalStorage();
+
+  alert("Preferences updated successfully!");
+
+  // Navigate back to main app
+  showSection(mainAppSection);
+});
+
+// Go Back to Main Button
+goBackToMainBtn.addEventListener("click", () => {
+  showSection(mainAppSection);
 });
 
 /********************************************
