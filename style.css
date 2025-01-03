@@ -1,5 +1,12 @@
 /* style.css */
 
+/* Optional custom highlight for selected buttons */
+.btn.selected {
+  background-color: #198754 !important; /* e.g., Bootstrap's success color */
+  color: white !important;
+  border-color: #198754 !important;
+}
+
 /* Custom transitions for overlay pop-in */
 #cartOverlay.showOverlay,
 #historyPage.showOverlay {
