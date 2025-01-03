@@ -86,7 +86,10 @@ const historyNextPageBtn = document.getElementById('historyNextPage');
 function hideAllSections() {
   const sections = [
     createAccount1Section, createAccount2Section, loginPageSection,
-    userPreferencesSection, mainAppSection
+    userPreferencesSection, mainAppSection,
+    myAccountSection, // Include My Account section here
+    cartOverlaySection,
+    historyPageSection
   ];
   sections.forEach(sec => sec.classList.add("d-none"));
 }
@@ -499,7 +502,9 @@ updatePreferencesBtn.addEventListener("click", () => {
 
 // Go Back to Main Button
 goBackToMainBtn.addEventListener("click", () => {
-  showSection(mainAppSection);
+  //showSection(mainAppSection);
+  hideAllSections(); // Ensure all sections are hidden
+  mainAppSection.classList.remove("d-none"); // Show main app
 });
 
 /********************************************
