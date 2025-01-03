@@ -7,6 +7,13 @@
   border-color: #198754 !important;
 }
 
+/* Optionally override the .active class to be more obvious */
+.btn.active {
+  background-color: #0d6efd !important;
+  color: white !important;
+  border-color: #0d6efd !important;
+}
+
 /* Custom transitions for overlay pop-in */
 #cartOverlay.showOverlay,
 #historyPage.showOverlay {
