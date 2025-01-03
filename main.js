@@ -458,6 +458,7 @@ logoutButton.addEventListener("click", () => {
   usernameDisplay.textContent = "";
 
   // Redirect to login page
+  hideAllSections(); // Ensure all sections are hidden
   showSection(loginPageSection);
 });
 
@@ -497,6 +498,7 @@ updatePreferencesBtn.addEventListener("click", () => {
   alert("Preferences updated successfully!");
 
   // Navigate back to main app
+  hideAllSections(); // Ensure all sections are hidden
   showSection(mainAppSection);
 });
 
