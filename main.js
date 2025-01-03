@@ -150,6 +150,9 @@ function loadSubcategory(subcat) {
   currentSubcategory = subcat;
   imageQueue = getImagesForSubcategory(currentCategory, currentSubcategory);
   displayCurrentImage();
+
+  // Also highlight the subcategory button
+  highlightSubcategoryButtons(subcat);
 }
 
 /********************************************
@@ -337,6 +340,9 @@ savePreferencesButton.addEventListener("click", () => {
   // Load default subcategory
   currentCategory = currentUser.gender;
   currentSubcategory = "tops";
+  // Example after user preferences are saved or loaded
+  highlightGenderButtons(currentCategory);
+  highlightSubcategoryButtons(currentSubcategory);
   imageQueue = getImagesForSubcategory(currentCategory, currentSubcategory);
   displayCurrentImage();
 });
@@ -380,14 +386,41 @@ historyNextPageBtn.addEventListener("click", () => {
   }
 });
 
+/********************************************
+ * Highlight Functions
+ ********************************************/
+function highlightGenderButtons(selectedGender) {
+  womenCategoryBtn.classList.remove('active');
+  menCategoryBtn.classList.remove('active');
+  if (selectedGender === 'women') {
+    womenCategoryBtn.classList.add('active');
+  } else {
+    menCategoryBtn.classList.add('active');
+  }
+}
+
+function highlightSubcategoryButtons(selectedSubcategory) {
+  subcategoryButtons.forEach((btn) => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-subcategory') === selectedSubcategory) {
+      btn.classList.add('active');
+    }
+  });
+}
+
+
 // Category Buttons
 womenCategoryBtn.addEventListener("click", () => {
   currentCategory = "women";
   loadSubcategory(currentSubcategory);
+  // Highlight the currently selected gender
+  highlightGenderButtons('women');
 });
 menCategoryBtn.addEventListener("click", () => {
   currentCategory = "men";
   loadSubcategory(currentSubcategory);
+  // Highlight the currently selected gender
+  highlightGenderButtons('men');
 });
 
 // Subcategory Buttons
@@ -395,6 +428,8 @@ subcategoryButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     const subcat = btn.getAttribute("data-subcategory");
     loadSubcategory(subcat);
+    // Highlight the currently selected subcategory
+    highlightSubcategoryButtons(subcat);
   });
 });
 
