@@ -138,7 +138,12 @@
     <!-- Top Nav / Cart Button -->
     <div class="d-flex justify-content-between mb-3">
       <h2 class="fw-bold">Eco-Fit Fashion</h2>
-      <button id="cartButton" class="btn btn-warning">Cart</button>
+      <div>
+        <span id="usernameDisplay" class="me-3 fw-bold text-primary"></span>
+        <button id="logoutButton" class="btn btn-danger btn-sm">Logout</button>
+        <button id="cartButton" class="btn btn-warning btn-sm me-2">Cart</button>
+        <button id="myAccountButton" class="btn btn-info btn-sm">My Account</button>
+      </div>
     </div>
 
     <!-- Subcategory Nav + History Button -->
@@ -238,6 +243,118 @@
     <!-- Close History Button -->
     <button id="closeHistory" class="btn btn-secondary">Close</button>
   </div>
+</section>
+
+  <!-- MY ACCOUNT PAGE -->
+<section id="my-account" class="container my-4 d-none">
+  <h1 class="mb-3 text-center">My Account</h1>
+
+  <h3 class="mb-4 text-center">Welcome, <span id="accountUsernameDisplay" class="text-primary"></span></h3>
+
+  <h2 class="mb-3">Update Preferences</h2>
+  
+  <div class="mb-3">
+    <label class="form-label fw-bold">Select Gender:</label>
+    <select id="accountGenderSelect" class="form-select">
+      <option value="women">Women</option>
+      <option value="men">Men</option>
+    </select>
+  </div>
+
+  <!-- Women sizes -->
+  <div id="accountWomenSizes">
+    <h3>Women Sizes</h3>
+    <div class="mb-3">
+      <label class="form-label">Top Size:</label>
+      <select id="accountWomenTopSize" class="form-select">
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL+</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Bottom Size:</label>
+      <select id="accountWomenBottomSize" class="form-select">
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL+</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Shoe Size:</label>
+      <select id="accountWomenShoeSize" class="form-select">
+        <option>4</option>
+        <option>4.5</option>
+        <option>5</option>
+        <option>5.5</option>
+        <option>6</option>
+        <option>6.5</option>
+        <option>7</option>
+        <option>7.5</option>
+        <option>8</option>
+        <option>8.5</option>
+        <option>9</option>
+        <option>9.5</option>
+        <option>10</option>
+        <option>10.5</option>
+        <option>11</option>
+        <option>11.5</option>
+        <option>12</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Men sizes -->
+  <div id="accountMenSizes" class="d-none">
+    <h3>Men Sizes</h3>
+    <div class="mb-3">
+      <label class="form-label">Top Size:</label>
+      <select id="accountMenTopSize" class="form-select">
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL+</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Bottom Size:</label>
+      <select id="accountMenBottomSize" class="form-select">
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL+</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Shoe Size:</label>
+      <select id="accountMenShoeSize" class="form-select">
+        <option>6</option>
+        <option>6.5</option>
+        <option>7</option>
+        <option>7.5</option>
+        <option>8</option>
+        <option>8.5</option>
+        <option>9</option>
+        <option>9.5</option>
+        <option>10</option>
+        <option>10.5</option>
+        <option>11</option>
+        <option>11.5</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+      </select>
+    </div>
+  </div>
+
+  <button id="updatePreferences" class="btn btn-primary mt-3">Update Preferences</button>
+  <button id="goBackToMain" class="btn btn-secondary mt-3">Back to Main</button>
 </section>
 
 
