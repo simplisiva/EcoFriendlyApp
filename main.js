@@ -8,6 +8,15 @@ let currentCategory = "women";   // 'women' or 'men'
 let currentSubcategory = "tops"; // 'tops' | 'bottoms' | 'shoes'
 let imageQueue = [];
 
+/********************************************
+ * Global State (Add pagination variables)
+ ********************************************/
+let cartPage = 0;          // current page for cart
+const cartPageSize = 5;    // items per cart page
+
+let historyPage = 0;       // current page for history
+const historyPageSize = 5; // items per history page
+
 // Section references
 const createAccount1Section = document.getElementById("create-account-1");
 const createAccount2Section = document.getElementById("create-account-2");
@@ -45,6 +54,14 @@ const subcategoryButtons = document.querySelectorAll(".subcategoryBtn");
 
 const swipeLeftBtn = document.getElementById("swipe-left");
 const swipeRightBtn = document.getElementById("swipe-right");
+
+/********************************************
+ * DOM Elements for Pagination Buttons
+ ********************************************/
+const cartPrevPageBtn = document.getElementById('cartPrevPage');
+const cartNextPageBtn = document.getElementById('cartNextPage');
+const historyPrevPageBtn = document.getElementById('historyPrevPage');
+const historyNextPageBtn = document.getElementById('historyNextPage');
 
 /********************************************
  * Utility / Helper Functions
@@ -135,10 +152,22 @@ function loadSubcategory(subcat) {
   displayCurrentImage();
 }
 
-// Render the cart
+/********************************************
+ * Render Cart with Pagination
+ ********************************************/
 function renderCart() {
   cartList.innerHTML = "";
-  cartItems.forEach((item, idx) => {
+
+  // 1. Calculate the slice of items for the current page
+  const startIndex = cartPage * cartPageSize;
+  const endIndex = startIndex + cartPageSize;
+  const pageItems = cartItems.slice(startIndex, endIndex);
+
+  // 2. Render only those items
+  pageItems.forEach((item, idx) => {
+    // idx is the index within pageItems, but we need the absolute index in cartItems
+    const actualIndex = startIndex + idx;
+    
     const li = document.createElement("li");
     li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
     li.innerHTML = `
@@ -147,29 +176,35 @@ function renderCart() {
         ${item.path}
       </div>
       <div>
-        <button class="btn btn-sm btn-outline-secondary minus-btn" data-index="${idx}">-</button>
+        <button class="btn btn-sm btn-outline-secondary minus-btn" data-index="${actualIndex}">-</button>
         <span class="mx-2">${item.quantity}</span>
-        <button class="btn btn-sm btn-outline-secondary plus-btn" data-index="${idx}">+</button>
-        <button class="btn btn-sm btn-danger delete-btn" data-index="${idx}">🗑</button>
+        <button class="btn btn-sm btn-outline-secondary plus-btn" data-index="${actualIndex}">+</button>
+        <button class="btn btn-sm btn-danger delete-btn" data-index="${actualIndex}">🗑</button>
       </div>
     `;
     cartList.appendChild(li);
   });
 
-  // Event listeners for cart item actions
+  // 3. Update pagination button states (disable if on first/last page)
+  cartPrevPageBtn.disabled = (cartPage === 0);
+  cartNextPageBtn.disabled = (endIndex >= cartItems.length);
+
+  // 4. Event listeners for items
   cartList.querySelectorAll(".minus-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const i = btn.getAttribute("data-index");
+      const i = parseInt(btn.getAttribute("data-index"));
       if (cartItems[i].quantity > 1) {
         cartItems[i].quantity--;
       }
+      // If removing a quantity to 0 is also desired, handle it here
       saveToLocalStorage();
+      // After changes, re-render
       renderCart();
     });
   });
   cartList.querySelectorAll(".plus-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const i = btn.getAttribute("data-index");
+      const i = parseInt(btn.getAttribute("data-index"));
       cartItems[i].quantity++;
       saveToLocalStorage();
       renderCart();
@@ -177,23 +212,46 @@ function renderCart() {
   });
   cartList.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const i = btn.getAttribute("data-index");
+      const i = parseInt(btn.getAttribute("data-index"));
       cartItems.splice(i, 1);
       saveToLocalStorage();
+
+      // If we removed the last item on the current page, we might need to adjust the page
+      const maxPage = Math.ceil(cartItems.length / cartPageSize) - 1; 
+      if (cartPage > maxPage) {
+        cartPage = Math.max(0, maxPage);
+      }
+
       renderCart();
     });
   });
 }
 
-// Render the history
+/********************************************
+ * Render History with Pagination
+ ********************************************/
 function renderHistory() {
   historyList.innerHTML = "";
-  historyItems.forEach(item => {
+
+  // 1. Calculate the slice of items for the current page
+  const startIndex = historyPage * historyPageSize;
+  const endIndex = startIndex + historyPageSize;
+  const pageItems = historyItems.slice(startIndex, endIndex);
+
+  // 2. Render only those items
+  pageItems.forEach(item => {
     const li = document.createElement("li");
     li.classList.add("list-group-item");
-    li.innerHTML = `<img src="${item}" alt="history-img" style="width:40px; height:auto;" class="me-2" /> ${item}`;
+    li.innerHTML = `
+      <img src="${item}" alt="history-img" style="width:40px; height:auto;" class="me-2" />
+      ${item}
+    `;
     historyList.appendChild(li);
   });
+
+  // 3. Update pagination button states
+  historyPrevPageBtn.disabled = (historyPage === 0);
+  historyNextPageBtn.disabled = (endIndex >= historyItems.length);
 }
 
 /********************************************
@@ -288,6 +346,39 @@ cartButton.addEventListener("click", showCartOverlay);
 historyButton.addEventListener("click", showHistoryOverlay);
 closeCartBtn.addEventListener("click", hideCartOverlay);
 closeHistoryBtn.addEventListener("click", hideHistoryOverlay);
+
+/********************************************
+ * Pagination Button Event Listeners
+ ********************************************/
+// Cart
+cartPrevPageBtn.addEventListener("click", () => {
+  if (cartPage > 0) {
+    cartPage--;
+    renderCart();
+  }
+});
+cartNextPageBtn.addEventListener("click", () => {
+  const maxPage = Math.ceil(cartItems.length / cartPageSize) - 1;
+  if (cartPage < maxPage) {
+    cartPage++;
+    renderCart();
+  }
+});
+
+// History
+historyPrevPageBtn.addEventListener("click", () => {
+  if (historyPage > 0) {
+    historyPage--;
+    renderHistory();
+  }
+});
+historyNextPageBtn.addEventListener("click", () => {
+  const maxPage = Math.ceil(historyItems.length / historyPageSize) - 1;
+  if (historyPage < maxPage) {
+    historyPage++;
+    renderHistory();
+  }
+});
 
 // Category Buttons
 womenCategoryBtn.addEventListener("click", () => {
