@@ -144,18 +144,36 @@
     <!-- Subcategory Nav + History Button -->
     <div class="mb-3 d-flex justify-content-between">
       <div>
-        <button id="womenCategory" class="btn btn-outline-success me-2">Women</button>
-        <button id="menCategory" class="btn btn-outline-success">Men</button>
+        <!-- Add a data attribute for easier handling in JS -->
+        <button id="womenCategory" 
+                class="btn btn-outline-success me-2" 
+                data-gender="women">
+          Women
+        </button>
+        <button id="menCategory" 
+                class="btn btn-outline-success" 
+                data-gender="men">
+          Men
+        </button>
       </div>
       <button id="historyButton" class="btn btn-secondary">History</button>
     </div>
 
+
     <!-- Subcategories -->
     <div id="subcategorySelector" class="mb-3">
-      <button class="subcategoryBtn btn btn-sm btn-success me-2" data-subcategory="tops">Tops</button>
-      <button class="subcategoryBtn btn btn-sm btn-success me-2" data-subcategory="bottoms">Bottoms</button>
-      <button class="subcategoryBtn btn btn-sm btn-success" data-subcategory="shoes">Shoes</button>
+      <!-- data-subcategory for each button -->
+      <button class="subcategoryBtn btn btn-sm btn-success me-2" data-subcategory="tops">
+        Tops
+      </button>
+      <button class="subcategoryBtn btn btn-sm btn-success me-2" data-subcategory="bottoms">
+        Bottoms
+      </button>
+      <button class="subcategoryBtn btn btn-sm btn-success" data-subcategory="shoes">
+        Shoes
+      </button>
     </div>
+
 
     <!-- Swiping Interface with Hammer.js -->
     <div class="card text-center p-3">
