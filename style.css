@@ -1,0 +1,21 @@
+/* style.css */
+
+/* Custom transitions for overlay pop-in */
+#cartOverlay.showOverlay,
+#historyPage.showOverlay {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* A gentle transition on image swipe can be done with transform animations if desired */
+#swipe-image.swipe-animation {
+  transition: transform 0.4s ease;
+}
