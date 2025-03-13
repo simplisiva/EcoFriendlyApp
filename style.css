@@ -57,7 +57,7 @@ body.bg-light {
 
 /* Override the btn-info class for the Account button */
 .btn-info {
-  background-color: #dea302; /* Red color */
+  background-color: #edbc37; /* Red color */
   color: white;
   border-color: #fcbb05;
 }
