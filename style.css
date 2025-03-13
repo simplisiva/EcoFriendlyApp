@@ -31,6 +31,18 @@ body.bg-light {
   border-color: #006400 !important;
 }
 
+/* Override the btn-danger class for the delete button */
+.btn-danger {
+  background-color: #dc3545; /* Red color */
+  color: white;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker red on hover */
+  border-color: #bd2130;
+}
+
 /* Custom transitions for overlay pop-in */
 #cartOverlay.showOverlay,
 #historyPage.showOverlay {
