@@ -2,19 +2,19 @@
 
 /* Change the background color to light green */
 body {
-  background-color: #75bf75; /* Light green background */
+  background-color: #efe7dd; /* Light green background */
 }
 
 /* Override the bg-light class for the body */
 body.bg-light {
-  background-color: #75bf75 !important; /* Light green background */
+  background-color: #efe7dd !important; /* Light green background */
 }
 
 /* Change the button colors to variations of darker green */
 .btn {
-  background-color: #2e8b57; /* Darker green for buttons */
+  background-color: #326a47; /* Darker green for buttons */
   color: white;
-  border-color: #2e8b57;
+  border-color: #326a47;
 }
 
 /* Optional custom highlight for selected buttons */
