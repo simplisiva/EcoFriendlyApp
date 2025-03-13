@@ -31,7 +31,7 @@ body.bg-light {
   border-color: #006400 !important;
 }
 
-/* Override the btn-danger class for the delete button */
+/* Override the btn-danger class for the delete button - No, delete and logout */
 .btn-danger {
   background-color: #dc3545; /* Red color */
   color: white;
@@ -39,23 +39,23 @@ body.bg-light {
 }
 
 .btn-danger:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333; /* Darker red on hover - No, delete and logout*/
   border-color: #bd2130;
 }
 
-/* Override the btn-warning class for the delete button */
+/* Override the btn-warning class for the Cart button */
 .btn-warning {
-  background-color: #dc3545; /* Red color */
+  background-color: #07b8b8; /* Red color */
   color: white;
-  border-color: #dc3545;
+  border-color: #05f5f5;
 }
 
 .btn-warning:hover {
-  background-color: #c82333; /* Darker red on hover */
-  border-color: #bd2130;
+  background-color: #05f5f5; /* Darker red on hover */
+  border-color: #05f5f5;
 }
 
-/* Override the btn-info class for the delete button */
+/* Override the btn-info class for the Account button */
 .btn-info {
   background-color: #dc3545; /* Red color */
   color: white;
@@ -67,7 +67,7 @@ body.bg-light {
   border-color: #bd2130;
 }
 
-/* Override the btn-secondary class for the delete button */
+/* Override the btn-secondary class for the history button */
 .btn-secondary {
   background-color: #dc3545; /* Red color */
   color: white;
