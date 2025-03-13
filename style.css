@@ -45,7 +45,7 @@ body.bg-light {
 
 /* Override the btn-warning class for the Cart button */
 .btn-warning {
-  background-color: #04e0e0; /* Red color */
+  background-color: #02eded; /* Red color */
   color: white;
   border-color: #05f5f5;
 }
@@ -57,7 +57,7 @@ body.bg-light {
 
 /* Override the btn-info class for the Account button */
 .btn-info {
-  background-color: #d19a02; /* Red color */
+  background-color: #dea302; /* Red color */
   color: white;
   border-color: #fcbb05;
 }
@@ -69,14 +69,14 @@ body.bg-light {
 
 /* Override the btn-secondary class for the history button */
 .btn-secondary {
-  background-color: #022dc9; /* Red color */
+  background-color: #000696; /* Red color */
   color: white;
-  border-color: #0236f2;
+  border-color: #020bf7;
 }
 
 .btn-secondary:hover {
-  background-color: #0236f2; /* Darker red on hover */
-  border-color: #0236f2;
+  background-color: #020bf7; /* Darker red on hover */
+  border-color: #020bf7;
 }
 
 /* Custom transitions for overlay pop-in */
