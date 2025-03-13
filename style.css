@@ -1,17 +1,29 @@
 /* style.css */
 
+/* Change the background color to light green */
+body {
+  background-color: #e6ffe6; /* Light green background */
+}
+
+/* Change the button colors to variations of darker green */
+.btn {
+  background-color: #2e8b57; /* Darker green for buttons */
+  color: white;
+  border-color: #2e8b57;
+}
+
 /* Optional custom highlight for selected buttons */
 .btn.selected {
-  background-color: #198754 !important; /* e.g., Bootstrap's success color */
+  background-color: #228b22 !important; /* Slightly darker green for selected buttons */
   color: white !important;
-  border-color: #198754 !important;
+  border-color: #228b22 !important;
 }
 
 /* Optionally override the .active class to be more obvious */
 .btn.active {
-  background-color: #0d6efd !important;
+  background-color: #006400 !important; /* Even darker green for active buttons */
   color: white !important;
-  border-color: #0d6efd !important;
+  border-color: #006400 !important;
 }
 
 /* Custom transitions for overlay pop-in */
