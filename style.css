@@ -5,6 +5,11 @@ body {
   background-color: #a1ffa1; /* Light green background */
 }
 
+/* Override the bg-light class for the body */
+body.bg-light {
+  background-color: #a1ffa1 !important; /* Light green background */
+}
+
 /* Change the button colors to variations of darker green */
 .btn {
   background-color: #2e8b57; /* Darker green for buttons */
